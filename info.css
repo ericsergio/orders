@@ -1,0 +1,36 @@
+#currentUl{
+	position: absolute;
+	top:25%;
+	left:1%;
+	list-style:none;
+	padding:7%;
+	z-index: 1;
+}
+#currentUl li {
+	/*float:left;*/
+	padding: 4% 3% 0 2%;
+	text-align: left;
+}
+ul {
+	columns: 4;
+	-webkit-columns: 4;
+	-moz-columns: 4;
+}
+.mousedOver{
+	color: blue;
+}
+#clickedLi{
+	position:absolute;
+	top: 30%;
+	left:40%;
+}
+.orderHistorySqlView{
+	position:absolute;
+	top: 40%;
+	left:40%;
+}
+#orderHistoryListSqlView{
+	position:absolute;
+	top: 40%;
+	left:60%;
+}

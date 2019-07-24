@@ -1,0 +1,30 @@
+function doWeb () 
+{ 
+    for i in index.php pages/oItemEntry.php pages/updatedb.php pages/do_db.php pages/info.php;
+    do
+        cat $i | sed "s/\/\/\$user = \'/\$user = \'/" | sed "s/\$user = \'e/\/\/\$user = \'e/" > ${i}switch;
+        mv ${i}switch $i;
+    done
+}
+function doLocal () 
+{ 
+    for i in index.php pages/oItemEntry.php pages/updatedb.php pages/do_db.php pages/info.php
+    do
+        cat $i | sed "s/\/\/\$user = \'/\$user = \'/" | sed "s/\$user = \'w/\/\/\$user = \'w/" > ${i}switch;
+        mv ${i}switch $i;
+    done
+}
+function chkv ()
+{
+    for i in index.php pages/oItemEntry.php pages/updatedb.php pages/do_db.php pages/info.php;
+    do
+        echo $i;
+        cat ${i} | grep -e '\$user' | grep -v ' new';
+        echo ---;
+    done
+}
+function doHead () 
+{ 
+    cat ~/MainSite/orders/pages/header.php | sed 's/->$//' | sed 's/^<!-//' | sed 's/a>$/a>-->/' | sed 's/^<a/<!--<a/' | sed 's/^-//' | sed 's/-$//' > ~/MainSite/orders/pages/t;
+    mv ~/MainSite/orders/pages/t ~/MainSite/orders/pages/header.php
+}
