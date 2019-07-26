@@ -124,13 +124,13 @@ $(document).ready(function () {
 			var oldVal = $('.activeCell').html();
 			var currentTable = $('#currTable').html();
 			$(this).parent().append(
-				'<li><input id = "inp" type = "text" name = "one"></input></li>' + 
-				'<li><input type = "submit" id = "sbmt"></input></li>' + 
+				'<li><input id = "inp" type = "text" name = "one"></li>' + 
+				'<li><input type = "submit" id = "sbmt"></li>' + 
 				'<li id = "lvl2CntrlExit">Exit</li>' + 
-				'<input type="hidden" name = "item" value ="' + item + '"></input>' + 
-				'<input type = "hidden" name = "oldVal" value = "' + oldVal + '"></input>' + 
-				'<input type = "hidden" name = "column" value = "' + activeCellColumn + '"></input>' +
-				'<input type = "hidden" name = "currentTable" value = "' + currentTable + '"></input>'
+				'<input type="hidden" name = "item" value ="' + item + '">' + 
+				'<input type = "hidden" name = "oldVal" value = "' + oldVal + '">' + 
+				'<input type = "hidden" name = "column" value = "' + activeCellColumn + '">' +
+				'<input type = "hidden" name = "currentTable" value = "' + currentTable + '">'
 			);
 			var thisParent = $(this).parent().parent();
 			thisParent.css('width', rowWidth);
@@ -178,7 +178,7 @@ $(document).ready(function () {
 			var rowToDel = $('.active')[0].children[0].innerText;
 			var currentTable = $('#currTable').html();
 			$('body').prepend('<form id = "deleteFrm" action = "del_from_db.php" method = "post"></form>');
-			$('#deleteFrm').append('<input id = "delVal" type = "hidden" name = "deleteThis" value = "' + rowToDel + '"></input><input type = "hidden" name = "fromTable" value = "' + currentTable + '"></input>');
+			$('#deleteFrm').append('<input id = "delVal" type = "hidden" name = "deleteThis" value = "' + rowToDel + '"><input type = "hidden" name = "fromTable" value = "' + currentTable + '">');
 			var delFrmRef = document.getElementById('deleteFrm');
 			delFrmRef.submit();
 		})
@@ -194,18 +194,27 @@ $(document).ready(function () {
 		});
 	});
 });
+/*function InsertItem(name, dist, type, par, orderType, orderQuantity, defaultOrder, onHand) {
+	this.name = name;
+	this.dist = dist;
+	this.par = par;
+	this.orderType = orderType;
+	this.orderQuantity = orderQuantity;
+	this.defaultOrder = defaultOrder;
+	this.onHand = onHand || null;
+}*/
 $(document).ready(function () {
 	var top = $('#results').offset().top - 30;
 	$('.p_cContent').prepend("<p id = 'addItem'>add item</p>");
 	$('#addItem').css({
-		'top': top,
-		'left': '15%',
-		'width': '200px',
-		'height': '30px',
-		'color': '#ffffff',
-		'border-radius': '13%',
-		'background-color': '#000080'
+		'top': top
 	});
+	$('#addItem').on('click', function () {
+		var currentTable = $('#currTable').html();
+		$('body').prepend('<form id = "insertFrm" action = "insert_item.php" method = "post"><input type = "hidden" name = "tableNum" value = ' + currentTable + '></form>');
+		var doInsertRef = document.getElementById('insertFrm');
+		doInsertRef.submit();
+	})
 })
 
 //bound to managedb.php's body onresize event

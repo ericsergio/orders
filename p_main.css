@@ -76,4 +76,11 @@ footer{
 }
 #addItem{
 	position: absolute;
+	left: 15%;
+	width: 200px;
+	height: 30px;
+	color: #ffffff;
+	border-radius: 12%;
+	background-color: #000080;
+	z-index: 7;
 }

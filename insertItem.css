@@ -1,0 +1,14 @@
+#sql_parts{
+	position: absolute;
+	top: 30%;
+	z-index: 2;
+}
+#insertSubmit{
+	position: absolute;
+	top: 30%;
+	left: 25%;
+	width: 12%;
+	background-color: #008880;
+	color: #ffffff;
+	z-index: 7;
+}
