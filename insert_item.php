@@ -9,8 +9,6 @@
 $user = 'ericsergio';$pass = 'password';$host = '127.0.0.1';$db_name = 'orders';
 			
 		$dsn = "mysql:host=$host;dbname=$db_name";
-
-
 	try{
 		$db = new PDO($dsn, $user, $pass);
 		$tbl_query = "DESCRIBE $table";
@@ -20,7 +18,6 @@ $user = 'ericsergio';$pass = 'password';$host = '127.0.0.1';$db_name = 'orders';
 			$sql_field_name = $result->Field;
 			$sql_field_type = $result->Type;
 			echo "<tr><td>$sql_field_name</td><td>$sql_field_type</td></tr>";
-			
 		}
 		echo "</table><p id = 'saveTbl'>$table</p>";
 		$db = NULL;

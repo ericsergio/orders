@@ -24,18 +24,14 @@ echo "<script type = 'text/javascript' src = '../scripts/do_db.js'></script>";
 //start the table which will be populated based on the index of the tab that was clicked in managedb.html
 echo "<table id = 'results'><tbody>";
 
-
-
 //$user = 'webdatat_serg852';$pass = 'l[V^p6?1PrN}';$host = 'serg8529.webdatatutorial.com';$db_name = 'webdatat_serg8529';
 
 $user = 'ericsergio';$pass = 'password';$host = '127.0.0.1';$db_name = 'orders';
 		
 		$dsn = "mysql:host=$host;dbname=$db_name";
-
-
 //the queries that correspond to which top tab in managedb.html that was clicked
 $queries = [
-	'SELECT * FROM items',
+	'SELECT * FROM items ORDER BY i_type',
 	'SELECT * FROM dists',
 	'SELECT * FROM order_units',
 	'SELECT * FROM ordered',
@@ -150,15 +146,6 @@ try {
 		echo "Error: ".$e->getMessage();
 		exit;
 }
-
-echo "<style>
-.active{
-	background-color:lightblue;
-}
-.activeCell{
-	background-color:yellow;
-}
-</style>";
 include('footer.php');
 //something to look into later; uses js to change the form action page which could be used to control which function user intends on applying/what user wants to modify
 /*echo "<script>doJs();</script>";*/

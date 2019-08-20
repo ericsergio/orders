@@ -31,3 +31,20 @@ $(document).ready(function () {
 		newInsert.submit();
 	})
 })
+$(document).ready(function () {
+	$('.p_cContent').append('<div id = "descDiv"><h4 id = "descHead"></h4><ul id = "descUl"><li id = "validType"></li><li id = "numVals"></li></ul></div>');
+	var valTypes = ['text', 'Number : 1-4', 'Number : 1-5', 'Number : Reorder Point', 'Number : 1-3', 'Number : 1-7', 'Number : Set Default Order', 'Number : Current On Hand'];
+	var numVals = ['just text and underscores', '<ul><li>1 : Southern</li><li>2 : Columbia</li><li>3 : Crown</li><li>4 : Youngs</li></ul>', '<ul><li>Liquor</li><li>Wine</li><li>Bottles</li><li>Kegs</li><li>Cans</li></ul>', 'Your Re-Order Point', '<ul><li>Case</li><li>Bottle</li><li>Keg</li></ul>', '<ul><li>187 ml</li><li>750 ml</li><li>1 Liter</li><li>1.5 Liter</li><li>Bottle</li><li>Keg</li><li>Can</li></ul>', 'Set Default Order', 'Set On Hand'];
+	$('input').each(function () {
+		var lblId = $(this).attr('id').replace('col_', '');
+		$(this).prev().attr('id', lblId);
+	})
+	$('label').each(function () {
+		$(this).next().focus(function () {
+			$('#descHead').html(($(this).attr('id')));
+			var idx = $(this).parent().parent().index();
+			$('#validType').html(valTypes[idx]);
+			$('#numVals').html(numVals[idx]);
+		})
+	})
+})

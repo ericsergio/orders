@@ -17,13 +17,19 @@ function setClickedTbl() {
 
 //sets up the top tabs which will control displaying what is currently in the database tables
 $(document).ready(function () {
-	var tArr = ['Items', 'Dists', 'Unit', 'Ordered', 'Unit Quantity'];
+	var tArr = ['Items', 'Dists', 'Unit', 'Ordered', 'Unit_Quantity'];
 	for(var p in tArr) {
 		var idx = Number(tArr.indexOf(tArr[p]));
 		//sets the id of the list items to the name from the array tArr concatenated with its index within the array. The id will be used in the next function to store the value of which item was clicked so in the php action page I can use that index in a switch statement to make the correct query to the database.
 		$('.p_top_controls ul').append('<li id = ' + tArr[p] + idx + '>' + tArr[p] + '</li>');
-	}
-})
+		var pTopControlsHeight = Number($('.p_top_controls').css('height').replace('px', ''));
+		var tblOpenControlsFont = pTopControlsHeight * .7;
+		$('.tblOpenControls li').css('fontSize', tblOpenControlsFont);
+		var tblOpenControlsHeight = pTopControlsHeight * .9;
+		$('.tblOpenControls').css('height', tblOpenControlsHeight);
+		var pTopControlsTop = Number($('.p_top_controls').css('top').replace('px', ''));
+	};
+});
 
 //gets which tab was clicked and sends its corresponding index number to do_db.php
 $(document).ready(function () {
@@ -40,17 +46,8 @@ $(document).ready(function () {
 		console.log(DisplayedTbl.clickedTable);
 		//use jquery to submit the form rather than a submit button
 		frm.submit();
-	})
-})
-$(document).ready(
-	function () {
-	var num = 15;
+	});
+});
+$(document).ready(function () {
 	$('#mngDb').parent().remove();
-	$('.headerNav li').each(
-		function () {
-			console.log(this);
-			$(this).css('left', num + '%');
-			num += 15;
-		}
-	)
-})
+});

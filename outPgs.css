@@ -1,0 +1,20 @@
+table{
+	position: absolute;
+	top:10%;
+	left:15%;
+	width:60%;
+	padding:5%;
+	border-top:solid #008000 2px;
+	border-left:solid #008000 2px;
+	border-right:solid #008000 2px;
+}
+th{
+	border-bottom:solid #008000 2px;
+}
+td{
+	font-family: Helvetica;
+	color:#000080;
+	text-align: center;
+	border-bottom:solid #008000 2px;
+	
+}

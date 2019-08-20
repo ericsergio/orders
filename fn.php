@@ -7,7 +7,7 @@ $user = 'ericsergio';$pass = 'password';$host = '127.0.0.1';$db_name = 'orders';
 			$dsn = "mysql:host=$host;dbname=$db_name";
 	try{
 		$db = new PDO($dsn, $user, $pass);
-		$query = "SELECT i_name, i_type FROM items";
+		$query = "SELECT i_name, i_type FROM items ORDER BY i_name";
 		$stmt = $db->prepare($query);	
 		$stmt->execute();
 		echo "<form id = 'count_frm' action = 'index.php' method = 'post'><br /><table id = 'booz'>";

@@ -1,3 +1,4 @@
+
 //Order item constructer. I did this because I plan on making the orders editable. To do that, I need more control of 
 //the items so this creates an OrderItem object that I will be able to more easily change and eventually create a new 
 //query from to put into the previously ordered database table.
@@ -15,10 +16,23 @@ function OrderItemString(id, str) {
 	this.id = id;
 	this.str = str;
 }
-
+//
+//
+//    
+//  api.jquery.com/jQuery.get/
+//----------------------------------------------------------------------------------------------------------------//
+//							<---
+//Because you/i am out of time come back to here -------- the values below inside the itemsNeeded.each etc.. should come 
+//from the files in the dists folder which have the identical info of the displayed data only it will permanently remain 
+//until the next submit .. if that makes sense... Don't get the values from 'this.children[0-9].innerHTML cuz they will 
+//only be available as long as the page doesnt refresh.. instead make the same variables get their values from the files 
+//that get written in the php code during the query in index.php (the one that compares the on hand to the par)
+//						----->
+// 
+//----------------------------------------------------------------------------------------------------------------
 //uses the hidden showOrder table td values to assign properties to the OrderItem object instances created here.
 function buildOrderObjects(){
-	var itemsNeeded = $('.showOrder').find('tr');
+	var itemsNeeded = $('.orderTables').find('tr');
 	var orderItems = [];
 	var num = 1;
 	//gather up the required values to be used as the parameters for the OrderItem instance creation.
@@ -43,6 +57,43 @@ function buildOrderObjects(){
 	})
 	return orderItems;
 }
+function tblRows() {
+	localStorage.clear();
+	var orderTablesRowCount = $('.orderTables').find('tr').length;
+	//console.log(orderTablesRowCount);
+	if(orderTablesRowCount > 0) {
+		for(var i = 0;i < orderTablesRowCount; i++) {
+			var storeItem = 'item' + i;
+			var row = $('.orderTables').find('tr')[i].outerHTML;
+			//console.log("storeItem: " + storeItem + " | row: " + row);
+			localStorage.setItem(storeItem, row);
+			localStorage.setItem('itemCount', orderTablesRowCount);
+		};
+	};
+};
+window.onload = function() {
+	var orderTablesRowCount = $('.orderTables').find('tr').length;
+	if(orderTablesRowCount < 1) {
+		var rowCount = localStorage.getItem('itemCount');
+		for(var i = 0;i < rowCount;i++) {
+			var storedItem = 'item' + i;
+			//console.log(storedItem);
+			var patt = /"[a-z][a-z]"/;
+			var row = localStorage.getItem(storedItem);
+			//console.log('storedItem ' + i + ' | rowSearch | ' + row.search(patt) + ' | ' + ' | patt | ' + patt + ' row ' + row);
+			//console.log(storedItem + ': ' + row.charAt(10) + row.charAt(11) + row.charAt(12));
+			//console.log(row.search(patt));
+			var tblStr = row.match(patt)[0].replace(/"/g, '');
+			var tblChr1 = tblStr.substr(0, 1).toUpperCase();
+			var tblChr2 = tblStr.substr(1,1);
+			var tStr = tblChr1 + tblChr2 + '_tbl';
+			var getTable = document.getElementById(tStr);
+			var gotTable = $(getTable);
+			gotTable.append(row);
+			//getTable.innerHTML = row;
+		};
+	};
+};
 function doPBtn1() {
 	$('.cContent').append('<form id = "enterItemsFrm" action = "pages/oItemEntry.php" method = "post"></form>');
 	var num = 1;
@@ -67,13 +118,21 @@ function doPBtn3() {
 	var pBtn1Placeholder = 'pBtn3';
 	console.log(pBtn1Placeholder);	
 }
+$(document).on("click", "#orderType", function () {
+	if($(this).parent().children()[2].innerHTML === '1') {
+		$('#orderTypeSelect').remove();
+		$('.active').append('<select id = "orderTypeSelect"><option value = "bottle">Bottle</option><option value = "case">Case</option></select>');
+	};
+});
 //var distDivs = ['soDiv', 'coDiv', 'crDiv', 'yoDiv'];
 //As I did on app.js, the next four functions are very similar and am only going to comment the first.
 $(document).ready(function () {
 	$('.boozDists li#Southern').click(
 	function() 
 	{
-		
+		tblRows();
+		var idx = $(this).index();
+	//	$('#hiddenIdx')[0].innerHTML = idx;
 		//removes the selectedDiv class from everything so it can be added to the only actually selected div below.
 		$('.boozDists li').each(function() {
 			$(this).removeClass('selectedDiv');
@@ -97,17 +156,15 @@ $(document).ready(function () {
 		if($('#orderFrm')) {
 			$('#orderFrm').remove();
 		}
-		//create new table after the hidden showOrder table
 		$('#booz').after(
-		//not used
 			'<form id = "orderFrm" action = "page.php" method = "post">' + 
 				'<div id = "soDiv">' + 
 					'<table id = "soTable">' + 
 						'<thead>' + 
 							'<th>Item</th>' + 
+							'<th>Order</th>' + 
 							'<th>Unit</th>' + 
-							'<th>Unit Type</th>' + 
-							'<th>Order</th>' +
+							'<th>Unit Type</th>' +
 							'<th>On Hand</th>' + 
 						'</thead>' + 
 					'</table>' + 
@@ -119,6 +176,7 @@ $(document).ready(function () {
 				'</div>' + 
 			'</form>'
 		);
+		$('#soTable').append($('#So_tbl').html());
 		$('#booz').hide();
 		var orderFormButton = $('#pBtn1');
 		var orderFormButtons = orderFormButton.parent().children();
@@ -128,14 +186,12 @@ $(document).ready(function () {
 		})
 		var orderFormButtonHeight = (Number(getComputedStyle(orderFormButton[0]).height.replace('px', '')) + 15) + 'px';
 		var orderFormButtonLeft = orderFormButton[0].id.substr(-1, 1);
-		//console.log(orderFormButtons);
 		orderFormButton.parent().css('height', orderFormButtonHeight);
-		
 		//re-add the active class to this clicks assosiated div
 		$('#soDiv').addClass('active');
 		var num = 1;
 		for(var p in buildOrderObjects()) {
-			console.log(buildOrderObjects()[p]);
+			//console.log(buildOrderObjects()[p]);
 			//if item belongs to this dist then start gathering variables 
 			if(buildOrderObjects()[p].dist == "Southern") {
 				var soName = buildOrderObjects()[p].name;
@@ -179,19 +235,10 @@ $(document).ready(function () {
 					"--" + 
 					soOnHand + 
 					"--";
-				//soOrderString is used to insert into ordered table, soOrderStr is used to display order
 				OrderItemString[[soName]] = new OrderItemString(num, soOrderString);
-				
-				//console.log(OrderItemString[[soName]]);
-				
-				//add row contents
-				if(Number(soOnHand) < Number(soPar)) {
-					$('#soTable').append('<tr>' + soOrderStr + '</tr>');
-				}
 			}
 			num += 1;
 		}
-		
 		//if any of the other distributer tabs have been clicked remove their active class 
 		var otherDists = [$('#coDiv'),$('#crDiv'),$('#yoDiv')];
 		//remove any other hidden inactive tables to reduce clutter
@@ -201,16 +248,22 @@ $(document).ready(function () {
 				otherDists[these].removeClass('active');
 				otherDists[these].hide();
 				otherDistsTbls[these].remove();
-			}
-		}
-	})
-})
+			};
+			var excludeTds = [$('td#dist'),$('td#type'), $('td#par')];
+			for(var p in excludeTds) {
+				excludeTds[p].hide();
+			};
+		};
+	});
+});
 
 //see above function
 $(document).ready(function () {
 	$('.boozDists li#Columbia').click(
 	function() 
 	{
+		tblRows();
+		var idx = $(this).index();
 		$('.boozDists li').each(function() {
 			$(this).removeClass('selectedDiv');
 		})
@@ -246,6 +299,7 @@ $(document).ready(function () {
 			'</div>' + 
 		'</form>'
 		);
+		$('#coTable').append($('#Co_tbl').html());
 		$('#booz').hide();
 		var orderFormButton = $('#pBtn1');
 		var orderFormButtons = orderFormButton.parent().children();
@@ -255,11 +309,9 @@ $(document).ready(function () {
 		})
 		var orderFormButtonHeight = (Number(getComputedStyle(orderFormButton[0]).height.replace('px', '')) + 15) + 'px';
 		var orderFormButtonLeft = orderFormButton[0].id.substr(-1, 1);
-		//console.log(orderFormButtons);
 		orderFormButton.parent().css('height', orderFormButtonHeight);
-		$('#soDiv').addClass('active');
+		$('#coDiv').addClass('active');	
 		var num = 1;
-		$('#coDiv').addClass('active');
 		for(var p in buildOrderObjects()) {
 			if(buildOrderObjects()[p].dist == "Columbia") {
 				var coName = buildOrderObjects()[p].name;
@@ -300,12 +352,8 @@ $(document).ready(function () {
 					coUnitType + 
 					"--" + 
 					coOnHand + 
-					"--";
-				
+					"--";				
 				OrderItemString[[coName]] = new OrderItemString(num, coOrderString);
-				if(Number(coOnHand) < Number(coPar)) {
-					$('#coTable').append('<tr>' + coOrderStr + '</tr>');
-				}
 			}
 			num += 1;
 		}
@@ -317,16 +365,22 @@ $(document).ready(function () {
 				otherDists[these].removeClass('active');
 				otherDists[these].hide();
 				otherDistsTbls[these].remove();
-			}
-		}
-	})
-})
+			};
+			var excludeTds = [$('td#dist'),$('td#type'), $('td#par')];
+			for(var p in excludeTds) {
+				excludeTds[p].hide();
+			};
+		};
+	});
+});
 
 //see 2 functions up
 $(document).ready(function () {
 	$('.boozDists li#Crown').click(
-	function() 
+	function()
 	{
+		tblRows();
+		var idx = $(this).index();
 		$('.boozDists li').each(function() {
 			$(this).removeClass('selectedDiv');
 		})
@@ -362,6 +416,7 @@ $(document).ready(function () {
 			'</div>' + 
 		'</form>'
 		);
+		$('#crTable').append($('#Cr_tbl').html());
 		$('#booz').hide();
 		var orderFormButton = $('#pBtn1');
 		var orderFormButtons = orderFormButton.parent().children();
@@ -371,9 +426,7 @@ $(document).ready(function () {
 		})
 		var orderFormButtonHeight = (Number(getComputedStyle(orderFormButton[0]).height.replace('px', '')) + 15) + 'px';
 		var orderFormButtonLeft = orderFormButton[0].id.substr(-1, 1);
-		//console.log(orderFormButtons);
 		orderFormButton.parent().css('height', orderFormButtonHeight);
-
 		$('#crDiv').addClass('active');
 		var num = 1;
 		for(var p in buildOrderObjects()) {
@@ -417,11 +470,7 @@ $(document).ready(function () {
 					"--" + 
 					crOnHand + 
 					"--";
-				
 				OrderItemString[[crName]] = new OrderItemString(num, crOrderString);
-				if(Number(crOnHand) < Number(crPar)) {
-					$('#crTable').append('<tr>' + crOrderStr + '</tr>');
-				}
 			}
 			num += 1;
 		}
@@ -433,17 +482,22 @@ $(document).ready(function () {
 				otherDists[these].removeClass('active');
 				otherDists[these].hide();
 				otherDistsTbls[these].remove();
-			}
-		}
-
-	})
-})
+			};
+			var excludeTds = [$('td#dist'),$('td#type'), $('td#par')];
+			for(var p in excludeTds) {
+				excludeTds[p].hide();
+			};
+		};
+	});
+});
 
 //see 3 functions up
 $(document).ready(function () {
 	$('.boozDists li#Youngs').click(
 	function()
 	{
+		tblRows();
+		var idx = $(this).index();
 		$('.boozDists li').each(function() {
 			$(this).removeClass('selectedDiv');
 		})
@@ -479,6 +533,7 @@ $(document).ready(function () {
 			'</div>' + 
 		'</form>'
 		);
+		$('#yoTable').append($('#Yo_tbl').html());
 		$('#booz').hide();
 		var orderFormButton = $('#pBtn1');
 		var orderFormButtons = orderFormButton.parent().children();
@@ -488,9 +543,7 @@ $(document).ready(function () {
 		})
 		var orderFormButtonHeight = (Number(getComputedStyle(orderFormButton[0]).height.replace('px', '')) + 15) + 'px';
 		var orderFormButtonLeft = orderFormButton[0].id.substr(-1, 1);
-		//console.log(orderFormButtons);
 		orderFormButton.parent().css('height', orderFormButtonHeight);
-
 		$('#yoDiv').addClass('active');
 		var num = 1;
 		for(var p in buildOrderObjects()) {
@@ -534,11 +587,7 @@ $(document).ready(function () {
 					"--" + 
 					yoOnHand + 
 					"--";
-				
 				OrderItemString[[yoName]] = new OrderItemString(num, yoOrderString);
-				if(Number(yoOnHand) < Number(yoPar)) {
-					$('#yoTable').append('<tr>' + yoOrderStr + '</tr>');
-				}
 			}
 			num += 1;
 		}
@@ -550,11 +599,11 @@ $(document).ready(function () {
 				otherDists[these].removeClass('active');
 				otherDists[these].hide();
 				otherDistsTbls[these].remove();
-			}
-		}
-	})
-})
-
-
-//$('#soDiv').addClass('active');
-//var num = 1;
+			};
+			var excludeTds = [$('td#dist'),$('td#type'), $('td#par')];
+			for(var p in excludeTds) {
+				excludeTds[p].hide();
+			};
+		};
+	});
+});

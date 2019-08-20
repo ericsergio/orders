@@ -12,5 +12,9 @@ echo "<ul class = 'headerNav'>
 <a id = 'itemInfoPage' href = 'http://localhost/orders/pages/info.php'>Item Info</a>
 <!--<a id = 'itemInfoPage' href = 'http://serg8529.webdatatutorial.com/cis243/orders/pages/info.php'>Item Info</a>-->
 </li>
+<li>
+<a id = 'aboutPage' href = 'http://localhost/orders/pages/about.php'>About</a>
+<!--<a id = 'itemInfoPage' href = 'http://serg8529.webdatatutorial.com/cis243/orders/pages/about.php'>About</a>-->
+</li>
 </ul>"
 ?>

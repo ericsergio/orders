@@ -1,36 +1,36 @@
-#currentUl{
+/*
+pages that use this css : pages/info.php
+*/
+div.cContent #currentUl{
 	position: absolute;
 	top:25%;
 	left:1%;
 	list-style:none;
 	padding:7%;
-	z-index: 1;
-}
-#currentUl li {
-	/*float:left;*/
-	padding: 4% 3% 0 2%;
-	text-align: left;
-}
-ul {
 	columns: 4;
 	-webkit-columns: 4;
 	-moz-columns: 4;
+	z-index: 1;
 }
-.mousedOver{
+div.cContent #currentUl li {
+	padding: 4% 3% 0 2%;
+	text-align: left;
+}
+div.cContent ul#currentUl li.mousedOver{
 	color: blue;
 }
-#clickedLi{
+div.cContent ul#currentUl li#clickedLi{
 	position:absolute;
 	top: 30%;
 	left:40%;
 }
-.orderHistorySqlView{
+div.cContent div.orderHistorySqlView{
 	position:absolute;
-	top: 40%;
-	left:40%;
+	top: 30%;
+	left:10%;
 }
-#orderHistoryListSqlView{
+div.cContent #infoDiv{
 	position:absolute;
-	top: 40%;
-	left:60%;
+	top: 30%;
+	left:40%;	
 }

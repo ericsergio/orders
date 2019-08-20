@@ -29,20 +29,20 @@ $columns = implode(', ', $cols);
 $value_part = ") VALUES(";
 
 $values = preg_replace($patt, $replace, $vals);
+
 for($i = 0; $i < count($values); $i++) {
 	if(strlen($values[$i]) > 2) {
-		echo "$values[$i]<br />";
 		$values[$i] = '"' . $values[$i] . '"';
 		//echo "<br />string: " . "gettype($values[$i])" . ": $values[$i]<br />";
 	}
 }
 
+//needed to allow for underscores in inserts
+$values[0] = '"' . substr($vals[0], 1) . '"';
 $val_str = implode(', ', $values);
 $end = ");";
 $query_part1 = $insert_part . $columns . $value_part; 
 $query_part2 = $val_str . $end;
-//echo $query_part1;
-//echo "<br /> $query_part2";
 //$user = 'webdatat_serg852';$pass = 'l[V^p6?1PrN}';$host = 'serg8529.webdatatutorial.com';$db_name = 'webdatat_serg8529';
 
 
@@ -53,7 +53,6 @@ $user = 'ericsergio';$pass = 'password';$host = '127.0.0.1';$db_name = 'orders';
 try {
 	$db = new PDO($dsn, $user, $pass);
 	$query = $query_part1 . $query_part2;
-	echo $query;
 	$stmt = $db->prepare($query);
 	//$stmt->bindParam()
 	$stmt->execute();

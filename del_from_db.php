@@ -24,7 +24,6 @@ try{
 	$delete_item = $delete_this;
 	//$query = "DELETE FROM :del_table WHERE :column = :delete_item";
 	$query = "DELETE FROM $del_table WHERE $column = \"$delete_item\"";
-	echo $query;
 	$stmt = $db->prepare($query);
 	//$stmt->bindParam(':del_table', $del_table, PDO::PARAM_STR);
 	//$stmt->bindParam(':column', $column, PDO::PARAM_STR);

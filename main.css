@@ -1,82 +1,61 @@
+#ps{
+	margin-top: 30%;
+	margin-left: 20%;
+}
+/*
+pages that use this css : index.php, pages/info.php
+*/
 body{
-	/*background-color: rgba(208, 234, 244, .3);*/
 	color: #804000;
+	height: auto;
+	width: auto;
 }
-.count_frm{
-	width:70%;
-}
-.rightSideBar{
-	position:fixed;
-	top:25%;
-	left:85%;
-	height:90%;
-	width:15%;
-	color:#fefbd8;
-	font-size:20px;
-	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-	font-variant: small-caps;
-	/*background-color: #618685;*/
-	z-index:0;
-	/*background: linear-gradient(to bottom, #36486b 0%, #e0e0d1 100%);*/
-	/*background: linear-gradient(to bottom, #618685 0%, #36486b 100%);*/
-}
-.typeMenu{
+
+div.cContent div.typeMenu{
 	position: fixed;
 	top: 15%;
 	left:0%;
+	height: 7%;
 	width:100%;
-	height:9%;
 	background: linear-gradient(to bottom, #618685 0%, #000000 100%);
-	color:#FFFFFF;
+	color:#ffffff;
+	border-radius: 8px;
 	box-shadow: 1px 8px 24px #36486b;
-	/*background: linear-gradient(to bottom, #e0e0d1 0%, #36486b 100%);*/
-	/*background: linear-gradient(to top, #618685 0%, #36486b 100%);*/
-	/*border-radius: 0% 0% 90% 20%;*/
 	z-index:2;
-	/*border-bottom:solid black 2px;
-	-moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-	-webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-	box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);*/
 }
-.typeMenu ul{
+
+div.cContent div.typeMenu ul.boozTypes{
 	position: absolute;
-	bottom:35%;
+	bottom:-16.4px;
+	right: 20%;
+	width: 72%;
+	/*border:solid 2px yellow;*/
 }
-.typeMenu ul li{
-	margin-top: 5%;
-	
-}
-.boozTypes li {
-	position: absolute;
-	/*top: 2%;*/
+
+div.cContent div.typeMenu ul.boozTypes li {
+	position: relative;
 	height:60%;
-	font-size: 20px;
+	width: 25%;
+	padding-right: 5%;
+	font-size: 25px;
 	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
 	font-variant: small-caps;
 	list-style:none;
+	display: inline;
 	text-align: center;
-	/*-moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-	-webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-	box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);*/
 	letter-spacing: 1px;
-	
 	width:19%;
 	color:#ffffff;
+	/*border:solid 2px yellow;*/
 	z-index: 3;
 }
 
-
-.boozTypes li.typesSelected{
+div.cContent div.typeMenu ul.boozTypes li.typesSelected{
 	text-decoration: underline;
-	/*position: absolute;*/
-	/*bottom:15%;*/
-	/*background-color:rgba(20,20,20,.5);*/
-	/*height:2em;*/
-	/*color:#FFFFFF;*/
-	/*border-radius: 14px;*/
-	/*box-shadow: 0px -10px 0px 4px rgba(0, 0, 0, .5);*/
+	color: yellow;
 }
-#tblTitle{
+
+div.cContent div.tblContain form#count_frm h2#tblTitle{
 	position: absolute;
 	margin:7% 0 0 30%;
 	width:8%;
@@ -89,169 +68,138 @@ body{
 	color:#ffffff;
 }
 
-.boozDists{
-	position: absolute;
-	top:5%;
-	right:15%;
-	width: 100%;
-	margin-top: 45%;
-	height:100%;
-	list-style: none;
-	border-left: solid black 1px;
-}
-.boozDists ul{
+div.cContent div.rightSideBar{
+	position:fixed;
+	top:0%;
+	left:82.5%;
+	height:90%;
+	width:15%;
+	color:#fefbd8;
+	font-size:20px;
 	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-	border-radius: 8px;
+	font-variant: small-caps;
+	border-left: solid black 3px;
+	z-index:0;
 }
 
-.boozDists li{
+div.cContent div.rightSideBar ul.boozDists{
+	position: absolute;
+	top:25%;
+	right: 5%;
+	width: 100%;
+	height:100%;
+	list-style: none;
+}
+
+div.cContent div.rightSideBar ul.boozDists li{
+	position: relative;
 	margin-top: 15%;
-	margin-left:3%;
-	width:100%;
-	height:9%;
+	margin-left:10%;
+	padding: 9px;
+	width:80%;
+	height:30px;
 	border:solid black 1px;
+	font-size:19px;
 	text-align: center;
 	background: linear-gradient(to top, #000000 0%, #618685 100%);
-	border:solid 1px;
 	box-shadow: inset 0px 0px 35px 2px #001a00;
-	border-radius: 14px;
+	border-radius: 24px;
 	letter-spacing: 1px;
 	color:#ffffff;
 }
 
-.boozDists li p{
-	
-}
-.boozDists li p{
-	position: absolute;
-	left:38%;
-}
-.tblContain{
+div.cContent div.tblContain{
 	position: absolute;
 	top:25%;
 	left:0%;
 	max-width:75%;
 }
-/*
-div[id*="Div"] > table[id*="Table"]{
-	width: 5em;
-	border: solid blue 3px;
-}
 
-table[id*="Table"], table[id*="Table"] td{
-	border: 1px solid black;
-}
-table[id*="Table"]{
-	table-layout: auto;
-	border-collapse: collapse;
-	width:100%;
-}
-*/
-#booz{
+div.cContent div.tblContain form#count_frm table#booz{
 	table-layout: fixed;
-	/*overflow-y: hidden;*/
 	margin-top: 5%;
 	margin-left: 5%;
 	width:70%;
 	border:solid black 20px;
 	background-color: #618685;
 	color:#FFFFFF;
-	/*background-image: radial-gradient(circle, #ccebff , #618685);*/
 	text-align: left;
 	border:solid 1px;
 	box-shadow: inset 0px 0px 55px 2px #001f33;
 	border-radius: 14px;
 	padding:40px;
 }
-#booz tbody tr td input{
+
+div.cContent div.tblContain form#count_frm table#booz tbody tr td input{
 	border:black solid 1px;
 }
-#booz tbody tr td{
+
+div.cContent div.tblContain form#count_frm table#booz tbody tr td{
 	font-family: Bookman;
 }
-#booz th{
+
+div.cContent div.tblContain form#count_frm table#booz th{
 	height:2em;
 	border-bottom:solid #000000 2px;
 }
 
-/*
-#booz > tbody > tr:nth-child(odd) {
-		background-color: #FFFFFF;
-		}
-*/
-	
-/*
-#booz > tbody > tr:nth-child(even) {
-		background-color: #FFFFFF;
-		}
-*/
-	
-#submitBtn {
+div.cContent div.tblContain form#count_frm input#submitBtn {
 	position: fixed;
-	top:36%;
-	left: 58%;
+	top:390px;
+	left: 84%;
 	height:6%;
-	width:16%;
-	background: linear-gradient(to top, #000000 0%, #618685 100%);
-/*	box-shadow: inset 0px 0px 15px 4px #36486b; */
-/*	background-image:radial-gradient(circle, #36486b 80%, #ffffff);*/
-/*	background-color:#36486b;*/
-/*	color:#fefbd8; */
+	width:12%;
+	background: linear-gradient(to top, #000000 0%, #003399 100%);
 	color: #ffffff;
 	font-family:Helvetica;
 	font-variant: small-caps;
 	font-size:16px;
 	border-radius: 15px;
-	/*box-shadow: 4px 4px 3px grey;*/
 	z-index: 3;
 }
 
-.boozDists li.selectedDiv{
+div.cContent div.rightSideBar ul.boozDists li.selectedDiv{
 	background: linear-gradient(to top, #000000 0%, #618685 100%);
 	border:solid 1px;
 	box-shadow: 0px 0px 35px 2px #001a00;
 }
 
-.currentInput{
+div.cContent div.tblContain form#count_frm table#booz tbody tr.currentInput{
 	background-color: #e0e0d1;
 	color:#000000;
 }
 
-.active table{
+div.cContent div.tblContain form#count_frm form#orderFrm .active table{
 	position: relative;
 	top:5%;
 	left:2%;
 	table-layout: fixed;
 	margin-top: 5%;
 	width:95%;
-	color:#FFFFFF;
+	color:#ffffff;
 	-moz-box-shadow: 30px 2px 4px rgba(0, 0, 0,0.5);
 	-webkit-box-shadow: 40px 2px 4px rgba(0, 0, 0, .5);
 	box-shadow: inset 0px 0px 40px 40px #737373;
 	background-color: #737373;
-	/*background-image: radial-gradient(#4d4d4d 70%, #008080 30%);*/
 	padding:20px;
 }
-.active table td{
+
+div.cContent div.tblContain form#count_frm form#orderFrm .active table tbody tr td {
 	font-family: Helvetica;
-	/*padding: 5px 35px 5px 15px;*/
+	text-align: right;
 }
-#soTable th, #coTable th, #crTable th, #yoTable th{
-	border-bottom:solid #4d4d4d 2px;
+
+div.cContent div.tblContain form#count_frm form#orderFrm .active table tbody tr td#name {
+	text-align: left;
+}
+
+div.cContent div.tblContain form#count_frm form#orderFrm .active table th {
+	border-bottom:solid #4d4d4d 12px;
 	height:2em;
 	color:#ccffff;
-}
-#soTable th, #soTable td, #coTable th, #coTable td, #crTable th, #crTable td, #yoTable th,#yoTable td{
 	text-align: center;
 }
 
-/*
-table[id*="Table"]{
-	table-layout: auto;
-	border-collapse: collapse;
-	width:100%;
-}
-*/
 input[id*="pBtn"]{
 	position: relative;
 	-moz-box-shadow: 30px 2px 4px rgba(0, 0, 0,0.5);
@@ -264,7 +212,8 @@ input[id*="pBtn"]{
 	z-index: 0;
 }
 /*In order for the orderFrmButtons div to line up with the table div directly above it, it's width must be the table div's width minus whatever padding times 2. As of right now the '.active table' css has a width of 95% and the 'orderFrmButtons' padding is at 3%; therefor the 'orderFrmButtons div' width must be 89%*/
-#orderFrmButtons{
+
+div.cContent div.tblContain form#count_frm form#orderFrm div.active #orderFrmButtons{
 	position: relative;
 	left:2%;
 	width:89%;

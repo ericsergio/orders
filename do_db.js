@@ -54,7 +54,7 @@ $(document).ready(function () {
 		$('#pPercentAbove').html("Percent Above: " + percentAbove + "%");
 		$('#ctl').remove();
 		$('body').append('<div id = "ctl"><ul id = "ctls"></ul></div>');
-		var controls = ['<li id = "cntrlEditDb">Change Value</li>', '<li id = "delRow">Delete DB Row</li>', '<li id = "cntrlExit">Exit</li>'];
+		var controls = ['<li id = "cntrlEditDb">Change Value</li>', '<li id = "delRow">Delete Row</li>', '<li id = "cntrlExit">Exit</li>'];
 		//check below
 		var controlIds = ['cntrlEditDb', 'delRow', 'cntrlExit' ];
 		for(var p in controls){
@@ -204,7 +204,7 @@ $(document).ready(function () {
 	this.onHand = onHand || null;
 }*/
 $(document).ready(function () {
-	var top = $('#results').offset().top - 30;
+	var top = $('#results').offset().top + 40;
 	$('.p_cContent').prepend("<p id = 'addItem'>add item</p>");
 	$('#addItem').css({
 		'top': top
@@ -216,7 +216,11 @@ $(document).ready(function () {
 		doInsertRef.submit();
 	})
 })
-
+$('body').onresize = function () {
+	positionTbl();
+	resizeHead();
+	resizeTopControls();
+}
 //bound to managedb.php's body onresize event
 function positionTbl() {
 	var greenOptionBar = $('div.p_top_controls');
