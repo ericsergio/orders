@@ -1,6 +1,6 @@
 <?php
 function booz(){
-//$user = 'webdatat_serg852';$pass = 'l[V^p6?1PrN}';$host = 'serg8529.webdatatutorial.com';$db_name = 'webdatat_serg8529';
+
 
 $user = 'ericsergio';$pass = 'password';$host = '127.0.0.1';$db_name = 'orders';
 			
